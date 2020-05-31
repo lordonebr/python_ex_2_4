@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <title>Gerenciamento de usuários</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Gerenciamento de usuários</h1>
+            <h6>Feito em Python</h6>
+
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/people/cadastro"><h4>Novo usuário</h4></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/people/listar"><h4>Listar usuários</h4></a>
+                </li>
+            </ul>
+
+            {% if pessoa %}
+            <div class="jumbotron">
+                <h1 class="display-4 mb-4">{{pessoa}}</h1>
+                <h4 class="mb-3">Informações</h4>
+                <p class="lead">Idade: {{pessoa.idade}}</p>
+                <p class="lead">Sexo: {{pessoa.get_sexo_display}}</p>
+                <p class="lead">Data de nascimento: 
+                    {% if pessoa.data_nascimento %}
+                        {{pessoa.data_nascimento}}
+                    {% endif %}
+                </p>
+                <p class="lead">CPF: {{pessoa.cpf}}</p>
+                <p class="lead">E-mail: {{pessoa.email}}</p>
+                
+                <hr class="my-4">
+                <h4 class="mb-3">Endereço</h4>
+                <p class="lead">Logradouro: {{endereco.logradouro}}</p>
+                <p class="lead">Número: {{endereco.numero}}</p>
+                <p class="lead">Bairro: {{endereco.bairro}}</p>
+                <p class="lead">CEP: {{endereco.cep}}</p>
+                <p class="lead">Município: {{endereco.municipio}}</p>
+                <p class="lead">Estado: {{endereco.get_estado_display}}</p>
+
+                <hr class="my-4">
+                <h4 class="mb-3">Escolaridade</h4>
+                <p class="lead">Nível: {{escolaridade.get_nivel_display}}</p>
+                <p class="lead">Progresso: {{escolaridade.get_progresso_display}}</p>
+                <p class="lead">Nome da instituição: {{escolaridade.instituicao}}</p>
+                <p class="lead">Ano de conclusão:
+                    {% if escolaridade.anoFinal %}
+                        {{escolaridade.anoFinal}}
+                    {% endif %}
+                </p>
+
+                <hr class="my-4">
+                <h4 class="mb-3">Trabalho</h4>
+                <p class="lead">Tem emprego: 
+                    {% if trabalho.temEmprego %}
+                        Sim
+                    {% else %} 
+                        Não
+                    {% endif %}
+                </p>
+                {% if trabalho.temEmprego %}
+                    <p class="lead">Nome da empresa: {{trabalho.empresa}}</p>
+                    <p class="lead">Cargo: {{trabalho.cargo}}</p>
+                {% endif %}
+
+                <hr class="my-4">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <form class="mr-2" action="/people/edicao/{{ pessoa.id }}/" method="post">
+                        <button type="submit" class="btn btn-primary btn-lg">Editar</button>
+                    </form>
+
+                    <form class="ml-2" action="/people/excluir/{{ pessoa.id }}/" method="post">
+                        <button type="submit" class="btn btn-danger btn-lg">Remover</button>
+                    </form>
+                </nav>
+                
+            </div>
+            {% else %}
+                <h4 class="mt-2">Não existe usuário com o ID = {{id}}</h4>
+            {% endif %}  
+        </div>
+    </body>
+</html>
