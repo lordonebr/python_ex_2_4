@@ -27,6 +27,21 @@ Aluno: André Guilherme de Almeida Santos
   python manage.py runserver
 ```  
 
+- COMANDO caso seja necessário instalar o Django:
+```
+  python -m pip install Django
+``` 
+
+- COMANDO para criar o virtualenv (ambiente virtual onde podemos ter um ambiente isolado para o desenvolvimento Python):
+```
+  python -m venv virtualenv
+``` 
+
+- COMANDO para entrar no virtualenv (devemos estar no mesmo diretório que foi executado o comando anterior):
+```
+  virtualenv\Scripts\activate.bat
+``` 
+
 ### Rotas
 * Página inicial:
 ```
